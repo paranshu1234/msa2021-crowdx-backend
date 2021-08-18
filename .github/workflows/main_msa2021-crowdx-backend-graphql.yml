@@ -11,6 +11,10 @@ on:
 jobs:
   build-and-deploy:
     runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: "./backend"
+
 
     steps:
     # checkout the repo
@@ -36,4 +40,3 @@ jobs:
         slot-name: Production
         publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8F429A291D50413F85855EDC59B4E3B8 }}
         package: ${{env.DOTNET_ROOT}}/myapp
-
