@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace backend.Model
 {
@@ -13,5 +15,11 @@ namespace backend.Model
         public string CoverImageURI { get; set; }
 
         public string AvatarImageURI { get; set; }
+
+        public ICollection<Post> Posts { get; set; }
+
+        public DateTime Created { get; set; }
+
+        public DateTime Modified { get; set; }
     }
 }

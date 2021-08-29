@@ -1,11 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace backend.Model
 {
     public class Post
     {
         [Key]
-        public int Id { get; set; }
+        public int PostId { get; set; }
         [Required]
         public string Title { get; set; }
 
@@ -15,5 +17,13 @@ namespace backend.Model
         public string Likes { get; set; }
 
         public string ImageURI { get; set; }
+        [Required]
+        public int CreatorId { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
+
+        public DateTime Created { get; set; }
+
+        public DateTime Modified { get; set; }
     }
 }
