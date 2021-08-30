@@ -1,4 +1,5 @@
 using backend.Data;
+using backend.GrapgQL.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,11 @@ namespace backend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddPooledDbContextFactory<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services
+                  .AddGraphQLServer()
+                  .AddQueryType(d => d.Name("Query"))
+                  .AddTypeExtension<UserQueries>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,11 +42,9 @@ namespace backend
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapGraphQL();
             });
         }
     }
