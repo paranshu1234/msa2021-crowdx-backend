@@ -9,7 +9,7 @@ namespace backend.Model
         public int CommentId { get; set; }
 
         [Required]
-        public string Content { get; set; }
+        public string? Content { get; set; }
         [Required]
         public int PostId { get; set; }
         [Required]

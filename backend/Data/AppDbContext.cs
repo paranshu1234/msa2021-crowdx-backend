@@ -7,9 +7,9 @@ namespace backend.Data
     {
         public AppDbContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Creator> Creators { get; set; }
-        public DbSet<Post> Posts { get; set; }
-        public DbSet<Comment> Comments { get; set; }
+        public DbSet<User> Users { get; set; } = default!;
+        public DbSet<Creator> Creators { get; set; } = default!;
+        public DbSet<Post> Posts { get; set; } = default!;
+        public DbSet<Comment> Comments { get; set; } = default!;
     }
 }
