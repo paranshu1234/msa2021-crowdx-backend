@@ -16,6 +16,9 @@ namespace backend.Model
 
         public string AvatarImageURI { get; set; }
 
+        [Required]
+        public int UserId { get; set; }
+
         public ICollection<Post> Posts { get; set; }
 
         public DateTime Created { get; set; }
