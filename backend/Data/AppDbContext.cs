@@ -36,6 +36,12 @@ namespace backend.Data
                 .WithMany(p => p.Comments)
                 .HasForeignKey(c => c.PostId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Comment>()
+              .HasOne(c => c.User)
+              .WithMany(u => u.Comments)
+              .HasForeignKey(c => c.UserId)
+              .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
