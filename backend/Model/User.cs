@@ -16,6 +16,8 @@ namespace backend.Model
 
         public string ImageURI { get; set; }
 
+        public Creator Creator { get; set; } = null!;
+
         public DateTime Created { get; set; }
 
         public DateTime Modified { get; set; }

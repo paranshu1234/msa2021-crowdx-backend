@@ -10,8 +10,8 @@ using backend.Data;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210831035623_UpdateCreator")]
-    partial class UpdateCreator
+    [Migration("20210901183027_AddedOneToOneCreator")]
+    partial class AddedOneToOneCreator
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Model.Comment", b =>
                 {
-                    b.Property<int>("CommentId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -38,16 +38,19 @@ namespace backend.Migrations
                     b.Property<int>("CreatorId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Modified")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("CommentId");
+                    b.HasIndex("CreatorId");
 
                     b.HasIndex("PostId");
 
@@ -83,6 +86,9 @@ namespace backend.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Creators");
                 });
@@ -158,30 +164,61 @@ namespace backend.Migrations
 
             modelBuilder.Entity("backend.Model.Comment", b =>
                 {
-                    b.HasOne("backend.Model.Post", null)
+                    b.HasOne("backend.Model.Creator", "Creator")
+                        .WithMany("Comments")
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("backend.Model.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("backend.Model.Post", b =>
-                {
-                    b.HasOne("backend.Model.Creator", null)
-                        .WithMany("Posts")
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Creator");
+
+                    b.Navigation("Post");
                 });
 
             modelBuilder.Entity("backend.Model.Creator", b =>
                 {
+                    b.HasOne("backend.Model.User", "User")
+                        .WithOne("Creator")
+                        .HasForeignKey("backend.Model.Creator", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("backend.Model.Post", b =>
+                {
+                    b.HasOne("backend.Model.Creator", "Creator")
+                        .WithMany("Posts")
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Creator");
+                });
+
+            modelBuilder.Entity("backend.Model.Creator", b =>
+                {
+                    b.Navigation("Comments");
+
                     b.Navigation("Posts");
                 });
 
             modelBuilder.Entity("backend.Model.Post", b =>
                 {
                     b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("backend.Model.User", b =>
+                {
+                    b.Navigation("Creator")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
