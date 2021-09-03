@@ -4,7 +4,7 @@ using backend.Data;
 using backend.Model;
 using HotChocolate;
 
-namespace backend.GrapgQL.Users
+namespace backend.GraphQL.Users
 {
     [ExtendObjectType(name: "Query")]
     public class UserQueries
