@@ -9,18 +9,20 @@ namespace backend.Model
         [Key]
         public int PostId { get; set; }
         [Required]
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
 
         [Required]
-        public string Content { get; set; }
+        public string Content { get; set; } = null!;
 
-        public string Likes { get; set; }
+        public string Likes { get; set; } = null!;
 
-        public string ImageURI { get; set; }
+        public string ImageURI { get; set; } = null!;
         [Required]
         public int CreatorId { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
+        public Creator Creator { get; set; } = null!;
+
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
         public DateTime Created { get; set; }
 

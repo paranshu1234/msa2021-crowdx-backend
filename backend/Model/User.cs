@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace backend.Model
@@ -15,6 +16,10 @@ namespace backend.Model
         public string Email { get; set; }
 
         public string ImageURI { get; set; }
+
+        public Creator Creator { get; set; } = null!;
+
+        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
         public DateTime Created { get; set; }
 
