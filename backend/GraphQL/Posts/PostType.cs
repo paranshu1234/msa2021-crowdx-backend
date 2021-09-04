@@ -33,9 +33,8 @@ namespace backend.GraphQL.Posts
                .ResolveWith<Resolvers>(r => r.GetComments(default!, default!, default))
                .UseDbContext<AppDbContext>()
                .Type<NonNullType<ListType<NonNullType<CommentType>>>>();
-
-            descriptor.Field(c => c.Modified).Type<NonNullType<DateTimeType>>();
             descriptor.Field(c => c.Created).Type<NonNullType<DateTimeType>>();
+            descriptor.Field(c => c.Modified).Type<NonNullType<DateTimeType>>();
 
         }
 

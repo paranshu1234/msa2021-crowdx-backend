@@ -35,8 +35,8 @@ namespace backend.GraphQL.Comments
                 .UseDbContext<AppDbContext>()
                 .Type<NonNullType<ListType<NonNullType<UserType>>>>();
             descriptor.Field(c => c.Description).Type<NonNullType<StringType>>();
-            descriptor.Field(c => c.Modified).Type<NonNullType<DateTimeType>>();
             descriptor.Field(c => c.Created).Type<NonNullType<DateTimeType>>();
+            descriptor.Field(c => c.Modified).Type<NonNullType<DateTimeType>>();
         }
 
         private class Resolvers {

@@ -39,9 +39,9 @@ namespace backend.GraphQL.Creators
               .ResolveWith<Resolvers>(r => r.GetUser(default!, default!, default))
               .UseDbContext<AppDbContext>()
               .Type<NonNullType<UserType>>();
-
-            descriptor.Field(c => c.Modified).Type<NonNullType<DateTimeType>>();
+        
             descriptor.Field(c => c.Created).Type<NonNullType<DateTimeType>>();
+            descriptor.Field(c => c.Modified).Type<NonNullType<DateTimeType>>();
 
         }
 
