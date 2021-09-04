@@ -54,6 +54,9 @@ namespace backend
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGraphQL();
+
+                // Voyager middleware at default path /ui/voyager
+                endpoints.MapGraphQLVoyager();
             });
         }
     }
