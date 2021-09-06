@@ -35,6 +35,7 @@ namespace backend
                   .AddTypeExtension<UserQueries>()
                   .AddMutationType(d => d.Name("Mutation"))
                   .AddTypeExtension<UserMutations>()
+                  .AddTypeExtension<CreatorMutations>()
                   .AddTypeExtension<PostMutations>()
                   .AddTypeExtension<CommentMutations>()
                   .AddType<PostType>()
