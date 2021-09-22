@@ -13,7 +13,7 @@ namespace backend.Model
         public string UserName { get; set; }
 
         [Required]
-        public string Email { get; set; }
+        public string Email { get; set; } = null!;
 
         public string ImageURI { get; set; }
 
